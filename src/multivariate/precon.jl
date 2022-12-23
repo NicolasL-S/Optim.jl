@@ -49,8 +49,8 @@ dot(A, ::Nothing, B) = dot(A, B)
 #      here, P is stored by the entries of its inverse
 #      TODO: maybe implement this in Base?
 
-mutable struct InverseDiagonal
-   diag
+mutable struct InverseDiagonal{T}
+   diag{T}
 end
 ldiv!(out::AbstractArray, P::InverseDiagonal, A::AbstractArray) = copyto!(out, A .* P.diag)
 dot(A::AbstractArray, P::InverseDiagonal, B::Vector) = dot(A, B ./ P.diag)
